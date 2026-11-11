@@ -248,6 +248,7 @@ export default function Home() {
           ) : (
             <UserList
               groupedUsers={filteredGroupedUsers}
+              allFileNumbers={Object.keys(groupedUsers)}
               onUserUpdated={fetchUsers}
               onUserDeleted={fetchUsers}
             />
