@@ -19,9 +19,10 @@ interface UserListProps {
   onUserUpdated: () => void;
   onUserDeleted: () => void;
   allFileNumbers?: string[];
+  fileCounts?: { [fileNumber: string]: number };
 }
 
-const UserList: React.FC<UserListProps> = ({ groupedUsers, onUserUpdated, onUserDeleted, allFileNumbers }) => {
+const UserList: React.FC<UserListProps> = ({ groupedUsers, onUserUpdated, onUserDeleted, allFileNumbers, fileCounts }) => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [expandedFiles, setExpandedFiles] = useState<string[]>([]);
   const [moveUser, setMoveUser] = useState<User | null>(null);
@@ -196,7 +197,7 @@ const UserList: React.FC<UserListProps> = ({ groupedUsers, onUserUpdated, onUser
               <option value="">Select a file...</option>
               {fileOptions.map((f) => (
                 <option key={f} value={f}>
-                  File #{f} ({(groupedUsers[f]?.length ?? 0)} users)
+                  File #{f} ({fileCounts?.[f] ?? groupedUsers[f]?.length ?? 0} users)
                 </option>
               ))}
             </select>
